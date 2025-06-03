@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Payment Invoice</title>
+  <link rel="stylesheet" href="viewscart.css">
+</head>
+<body>
+  <div class="background">
+    <div class="invoice">
+      <div class="header">
+        <img src="https://cdn-icons-png.flaticon.com/512/891/891462.png" alt="Invoice Icon" class="icon">
+        <h1>Payment Invoice</h1>
+      </div>
+
+      <?php
+      $servername = "localhost";
+      $username = "root";
+      $password = "";
+      $dbname = "computer";
+        $conn = new mysqli($servername, $username, $password, $dbname);
+  
+        $result=mysqli_query($conn,"SELECT * FROM cart");
+   ?>
+   <center>
+
+      <div class="details">
+        <center>
+
+            <table class='table' border='1px solide'>
+                          <thead>
+                          <tr>
+                           <th scope='col'>Name product</th>
+                           <th scope='col'>price product</th>
+                           <th scope='col'>Delete product</th>
+                          </tr>
+           
+            </center>
+      </div>
+
+
+      <?php
+
+      while($row=mysqli_fetch_array($result)){
+
+
+
+     echo "
+
+      <center>
+         <main>
+                  <table class='table' border='1px solide'>
+
+
+                 <tbody>
+                    <tr>
+                        <td>$row[namecart]</td>
+                        <td>$row[pricecart] $</td>
+                       <td>   <a href='deletecart.php? id=$row[idcart]' class='btn btn-danger' name=delete>delete</a></td>
+                    </tr>
+
+                
+                    
+                 </tbody>
+            </table>
+         </main>
+
+    </center>
+     
+
+     ";
+    
+      }
+      
+
+    ?>
+
+
+    <br><br><a href="index.php" class="a"> Products</a>
+    
+
+    </center>
+
+    
+         
+
+
+
+
+      <div class="payment-methods">
+        <h2>Select Payment Method:</h2>
+
+        <!-- PayPal -->
+        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+          <input type="hidden" name="cmd" value="_xclick">
+          <input type="hidden" name="business" value="YOUR_PAYPAL_EMAIL@example.com">
+          <input type="hidden" name="item_name" value="Monthly Subscription - Learning Platform">
+          <input type="hidden" name="amount" value="20.00">
+          <input type="hidden" name="currency_code" value="USD">
+         
+          <a href="paypl.php" > <img src="https://www.paypalobjects.com/webstatic/mktg/logo/pp_cc_mark_74x46.jpg" class="image" alt="PayPal Logo"></a>
+        </form>
+
+        <!-- Cash -->
+        <div class="cash">
+          <img src="https://cdn-icons-png.flaticon.com/512/2331/2331946.png" alt="Cash Icon" class="icon-small">
+          <h3>Please prepare the cash </h3>
+          
+      
+
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
